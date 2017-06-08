@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ECharts">
+    <meta name="author" content="kener.linfeng@gmail.com">
+    <title>"一带一路"沿线国家1990-2015年森林覆盖变化趋势</title>
+    <!--<link rel="stylesheet" href="css/swiper.min.css">-->
+    <link rel="stylesheet" href="css/idangerous.swiper2.7.6.css">
+    <script src="js/idangerous.swiper2.7.6.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        #county:focus {
+            border: none;
+            outline: none;
+        }
+
+        .swiper-slide {
+            position: relative;
+        }
+
+        .pagination {
+            position: absolute;
+            z-index: 20;
+            right: 10px;
+            top: 50%;
+            width: 10px;
+            text-align: center;
+        }
+
+        .swiper-pagination-switch {
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            background: #ccc;
+            margin: 0 5px;
+            opacity: 0.8;
+            border: 1px solid #fff;
+            cursor: pointer;
+        }
+
+        .swiper-active-switch {
+            background: #007aff;
+        }
+
+        .swiper-button-next {
+            cursor: pointer;
+        }
+
+        select {
+            /*! *Chrome和Firefox里面的边框是不一样的，所以复写了一下 *!*/
+            border: solid 1px #000;
+
+            /*! *很关键：将默认的select选择框样式清除 *!*/
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+
+            /*! *在选择框的最右侧中间显示小箭头图片 *!*/
+            background: url("images/2.png") no-repeat scroll right center transparent;
+
+            /*! *为下拉小箭头留出一点位置，避免被文字覆盖 *!*/
+            padding-right: 14px;
+        }
+
+        /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+        select::-ms-expand {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <p class="title">"一带一路"沿线国家1990-2015年森林覆盖变化趋势</p>
+            <div id="main" class="swiper-no-swiping"
+                 style="width: 80%;height: 80%; border:1px solid #ccc; margin: 30px auto;"></div>
+            <div class="swiper-button-next" onclick="next();"><img src="images/next.png" alt=""></div>
+        </div>
+        <div class="swiper-slide">
+            <p class="title">"一带一路"沿线国家1990-2015年森林覆盖变化趋势（
+                <select name="" class="select" id="county" style="color: rgb(0, 0, 204);border: none;font-size: 18px;"
+                        onclick="resetSelectWidth(this)">
+                    <option value="China">中国</option>
+                    <option value="Mongolia">蒙古国</option>
+                    <option value="Malaysia">马来西亚</option>
+                    <option value="Indonesia">印度尼西亚</option>
+                    <option value="Myanmar">缅甸</option>
+                    <option value="Thailand">泰国</option>
+                    <option value="Laos">老挝</option>
+                    <option value="Cambodia">柬埔寨</option>
+                    <option value="Vietnam">越南</option>
+                    <option value="Brunei">文莱</option>
+                    <option value="Philippines">菲律宾</option>
+                    <option value="Iran">伊朗</option>
+                    <option value="Iraq">伊拉克</option>
+                    <option value="Turkey">土耳其</option>
+                    <option value="Syria">叙利亚</option>
+                    <option value="Jordan">约旦</option>
+                    <option value="Lebanon">黎巴嫩</option>
+                    <option value="Israel">以色列</option>
+                    <option value="Saudi Arabia">沙特阿拉伯</option>
+                    <option value="Yemen">也门</option>
+                    <option value="Oman">阿曼</option>
+                    <option value="United Arab Emirates">阿联酋</option>
+                    <option value="Qatar">卡塔尔</option>
+                    <option value="Kuwait">科威特</option>
+                    <option value="Greece">希腊</option>
+                    <option value="Cyprus">塞浦路斯</option>
+                    <option value="Egypt">埃及</option>
+                    <option value="India">印度</option>
+                    <option value="Pakistan">巴基斯坦</option>
+                    <option value="Bangladesh">孟加拉</option>
+                    <option value="Afghanistan">阿富汗</option>
+                    <option value="Sri Lanka">斯里兰卡</option>
+                    <option value="Bhutan">不丹</option>
+                    <option value="Kazakhstan">哈萨克斯坦</option>
+                    <option value="Uzbekistan">乌兹别克斯坦</option>
+                    <option value="Turkmenistan">土库曼斯坦</option>
+                    <option value="Tajikistan">塔吉克斯坦</option>
+                    <option value="Kyrgyzstan">吉尔吉斯斯坦</option>
+                    <option value="Russia">俄罗斯</option>
+                    <option value="Ukraine">乌克兰</option>
+                    <option value="Belarus">白俄罗斯</option>
+                    <option value="Georgia">格鲁吉亚</option>
+                    <option value="Azerbaijan">阿塞拜疆</option>
+                    <option value="Armenia">亚美尼亚</option>
+                    <option value="Moldova">摩尔多瓦</option>
+                    <option value="Poland">波兰</option>
+                    <option value="Lithuania">立陶宛</option>
+                    <option value="Estonia">爱沙尼亚</option>
+                    <option value="Latvia">拉脱维亚</option>
+                    <option value="Czech Republic">捷克</option>
+                    <option value="Slovakia">斯洛伐克</option>
+                    <option value="Hungary">匈牙利</option>
+                    <option value="Slovenia">斯洛文尼亚</option>
+                    <option value="Croatia">克罗地亚</option>
+                    <option value="Montenegro">黑山</option>
+                    <option value="Republic of Serbia">塞尔维亚</option>
+                    <option value="Albania">阿尔巴尼亚</option>
+                    <option value="Romania">罗马尼亚</option>
+                    <option value="Bulgaria">保加利亚</option>
+                </select>
+                ）
+            </p>
+            <div id="echarts2" class="swiper-no-swiping"
+                 style="width: 80%;height: 80%; border:1px solid #ccc; margin: 30px auto;"></div>
+            <!-- <div class="sort">
+                <select name="" id="county">
+                                    <option value="China">中国</option>
+                                    <option value="Mongolia">蒙古国</option>
+                                    <option value="Malaysia">马来西亚</option>
+                                    <option value="Indonesia">印度尼西亚</option>
+                                    <option value="Myanmar">缅甸</option>
+                                    <option value="Thailand">泰国</option>
+                                    <option value="Laos">老挝</option>
+                                    <option value="Cambodia">柬埔寨</option>
+                                    <option value="Vietnam">越南</option>
+                                    <option value="Brunei">文莱</option>
+                                    <option value="Philippines">菲律宾</option>
+                                    <option value="Iran">伊朗</option>
+                                    <option value="Iraq">伊拉克</option>
+                                    <option value="Turkey">土耳其</option>
+                                    <option value="Syria">叙利亚</option>
+                                    <option value="Jordan">约旦</option>
+                                    <option value="Lebanon">黎巴嫩</option>
+                                    <option value="Israel">以色列</option>
+                                    <option value="Saudi Arabia">沙特阿拉伯</option>
+                                    <option value="Yemen">也门</option>
+                                    <option value="Oman">阿曼</option>
+                                    <option value="United Arab Emirates">阿联酋</option>
+                                    <option value="Qatar">卡塔尔</option>
+                                    <option value="Kuwait">科威特</option>
+                                    <option value="Greece">希腊</option>
+                                    <option value="Cyprus">塞浦路斯</option>
+                                    <option value="Egypt">埃及</option>
+                                    <option value="India">印度</option>
+                                    <option value="Pakistan">巴基斯坦</option>
+                                    <option value="Bangladesh">孟加拉</option>
+                                    <option value="Afghanistan">阿富汗</option>
+                                    <option value="Sri Lanka">斯里兰卡</option>
+                                    <option value="Bhutan">不丹</option>
+                                    <option value="Kazakhstan">哈萨克斯坦</option>
+                                    <option value="Uzbekistan">乌兹别克斯坦</option>
+                                    <option value="Turkmenistan">土库曼斯坦</option>
+                                    <option value="Tajikistan">塔吉克斯坦</option>
+                                    <option value="Kyrgyzstan">吉尔吉斯斯坦</option>
+                                    <option value="Russia">俄罗斯</option>
+                                    <option value="Ukraine">乌克兰</option>
+                                    <option value="Belarus">白俄罗斯</option>
+                                    <option value="Georgia">格鲁吉亚</option>
+                                    <option value="Azerbaijan">阿塞拜疆</option>
+                                    <option value="Armenia">亚美尼亚</option>
+                                    <option value="Moldova">摩尔多瓦</option>
+                                    <option value="Poland">波兰</option>
+                                    <option value="Lithuania">立陶宛</option>
+                                    <option value="Estonia">爱沙尼亚</option>
+                                    <option value="Latvia">拉脱维亚</option>
+                                    <option value="Czech Republic">捷克</option>
+                                    <option value="Slovakia">斯洛伐克</option>
+                                    <option value="Hungary">匈牙利</option>
+                                    <option value="Slovenia">斯洛文尼亚</option>
+                                    <option value="Croatia">克罗地亚</option>
+                                    <option value="Montenegro">黑山</option>
+                                    <option value="Republic of Serbia">塞尔维亚</option>
+                                    <option value="Albania">阿尔巴尼亚</option>
+                                    <option value="Romania">罗马尼亚</option>
+                                    <option value="Bulgaria">保加利亚</option>
+                                </select>
+            </div> -->
+        </div>
+    </div>
+    <div class="pagination"></div>
+</div>
+</body>
+</html>
+<!--<script src="js/swiper.min.js"></script>-->
+<!--<script src="js/idangerous.swiper2.7.6.js"></script>-->
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        /*direction: 'vertical',
+         mousewheelControl: true,
+         pagination: '.swiper-pagination',
+         noSwiping: true,
+         nextButton: '.swiper-button-next',*/
+        /*********2.x***************/
+        mode: "vertical",
+        pagination: '.pagination',
+        paginationClickable: true,
+        mousewheelControl: true
+
+    });
+    function next() {
+        mySwiper.swipeNext();
+    }
+
+</script>
+<script src="js/echarts-all.js"></script>
+<script src="js/mapData.js"></script>
+<script>
+    var option = {
+        timeline: {
+            type: 'number',
+            data: [
+                '1', '2', '3', '4'
+            ],
+            label: {
+                formatter: function (s) {
+                    switch (s) {
+                        case '1' :
+                            return "1990-2000";
+                            break;
+                        case '2' :
+                            return "2000-2010";
+                            break;
+                        case '3' :
+                            return "2010-2015";
+                            break;
+                        case '4' :
+                            return "1990-2015";
+                            break;
+                    }
+                }
+            },
+            controlPosition: "none"
+        },
+        options: [
+            {
+                title: {
+                    'text': '1990-2000年沿线各国森林覆盖面积增长率',
+                },
+                tooltip: tooltip,
+                toolbox: toolBox,
+                dataRange: dataRange2,
+//                backgroundColor: '#bef4f5',//背景色
+                series: [{
+                    name: '森林覆盖面积增长率',
+                    type: 'map',
+                    mapType: 'world',
+                    roam: true,
+                    mapLocation: {
+                        x: -500,
+                        y: 3,
+                        // width:'2000',
+                        height: '780'
+                    },
+                    itemStyle: {
+                        emphasis: {label: {show: true}}
+                    },
+                    data: map_Data1,
+                    nameMap: nameMap
+                }]
+            },
+            {
+                title: {
+                    'text': '2000-2010年沿线各国森林覆盖面积增长率',
+                },
+                tooltip: tooltip,
+                toolbox: toolBox,
+                dataRange: dataRange2,
+                series: [{
+                    name: '森林覆盖面积增长率',
+                    type: 'map',
+                    mapType: 'world',
+                    roam: true,
+                    mapLocation: {
+                        x: -500,
+                        y: 3,
+                        // width:'2000',
+                        height: '780'
+                    },
+                    itemStyle: {
+                        emphasis: {label: {show: true}}
+                    },
+                    data: map_Data2,
+                    nameMap: nameMap
+                }]
+            },
+            {
+                title: {
+                    'text': '2010-2015年沿线各国森林覆盖面积增长率',
+                },
+                tooltip: tooltip,
+                toolbox: toolBox,
+                dataRange: dataRange2,
+                series: [{
+                    name: '森林覆盖面积增长率',
+                    type: 'map',
+                    mapType: 'world',
+                    roam: true,
+                    mapLocation: {
+                        x: -500,
+                        y: 3,
+                        // width:'2000',
+                        height: '780'
+                    },
+                    itemStyle: {
+                        emphasis: {label: {show: true}}
+                    },
+                    data: map_Data3,
+                    nameMap: nameMap
+                }]
+            },
+            {
+                title: {
+                    'text': '1990-2015年沿线各国森林覆盖面积增长率',
+                },
+                tooltip: tooltip,
+                toolbox: toolBox,
+                dataRange: dataRange2,
+                series: [{
+                    name: '森林覆盖面积增长率',
+                    type: 'map',
+                    mapType: 'world',
+                    roam: true,
+                    mapLocation: {
+                        x: -500,
+                        y: 3,
+                        // width:'2000',
+                        height: '780'
+                    },
+                    itemStyle: {
+                        emphasis: {label: {show: true}}
+                    },
+                    data: map_Data4,
+                    nameMap: nameMap
+                }]
+            }
+        ]
+    };
+    var app = echarts.init(document.getElementById('main'));
+    app.setOption(option);
+</script>
+<script src="js/select.js"></script>

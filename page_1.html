@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>“一带一路”沿线国家森林面积及覆盖率</title>
+    <!-- <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;"> -->
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+     <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <p class="title">“一带一路”沿线国家1990-2015年森林覆盖率变化趋势</p>
+                <div id="main" class="swiper-no-swiping" style="width: 80%;height: 80%; border:1px solid #ccc; margin: 30px auto;"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <div class="swiper-slide">
+                <div id="echarts2" class="swiper-no-swiping" style="width: 80%;height: 80%; border:1px solid #ccc; position: absolute;top:60px;left:50%;transform: translateX(-50%);"></div>
+                <div id="echarts3" class="swiper-no-swiping" style="width: 80%;height: 80%; border:1px solid #ccc;position: absolute;top:60px;left:50%;transform: translateX(-50%); visibility: hidden;"></div>
+                <!-- <div class="swiper-button-prev"></div> -->
+        <div class="sort">
+            <span onclick="fn1()">森林覆盖面积排序</span>
+            <span onclick="fn2()">森林覆盖率排序</span>
+        </div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</body>
+</html>
+<script src="js/swiper.min.js"></script>
+<script> 
+var mySwiper = new Swiper('.swiper-container', {
+    direction:'vertical',
+    mousewheelControl:true,
+    pagination : '.swiper-pagination',
+    noSwiping : true,
+    nextButton:'.swiper-button-next',
+})
+</script>
+<script src="js/echarts-all.js"></script>
+<script>
+var option = {
+    tooltip : {
+        show: true,
+        trigger: 'item',
+        formatter : function (params) {
+            // console.log(params);
+            if(typeof(params.value)!='number'){
+                option.tooltip.show = false;
+                return '';
+            }else{
+                var value = (params.value + '').split('.');
+                /*value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,')
+                        + '（' + value[1].slice(0,-1)+'.'+ value[1].slice(-1)+'%）';*/
+                var value1 = value[1].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
+                var value2 =  value[0].length>1?value[0].slice(0,-1)+'.'+ value[0].slice(-1)+'%':'0.'+ value[0].slice(-1)+'%';
+                // console.log(params.name + '<br/>森林覆盖面积:&nbsp;' + value1 +'<br/>森林覆盖率：'+value2);
+                return params.name + '<br/>森林覆盖面积:&nbsp;' + value1 +'<br/>森林覆盖率：'+value2;
+            }
+            
+        }
+    },
+    toolbox: {
+        show : true,
+        orient : 'vertical',
+        x: 'right',
+        y: 'center',
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    dataRange: {
+        min: 0,
+        max: 800,
+        text:['高','低'],
+        realtime: false,
+        calculable : true,
+        // color: ['violet','blue','cyan','green','yellow','orange','red']
+        // color:['green','yellow','red']
+        // color:['orangered','yellow','lightskyblue']
+        color:['green','yellow','lightskyblue']
+    },
+    series : [
+        {
+            name:'China',
+            type:'map',
+            mapType: 'world',
+            data:[],
+            roam: true,
+            mapLocation: {
+                y : 60
+            },
+            geoCoord: {
+                  "Angola":[17.87,-11.20],
+    "Afghanistan":[67.71,33.94],
+    "Albania":[20.17,41.15],
+    "Algeria":[1.66,28.03],
+    "Andorra":[1.52,42.51],
+    "Anguilla":[-63.07,18.22],
+    "Argentina":[-63.62,-38.42],
+    "Armenia":[45.04,40.07],
+    "Ascension":[-90.94,30.20],
+    "Australia":[133.78,-25.27],
+    "Austria":[14.55,47.52],
+    "Azerbaijan":[47.58,40.14],
+    "Bahamas":[-77.40,25.03],
+    "Bahrain":[50.56,26.07],
+    "Bangladesh":[90.36,23.68],
+    "Barbados":[-59.54,13.19],
+    "Belarus":[27.95,53.71],
+    "Belgium":[4.47,50.50],
+    "Belize":[-88.50,17.19],
+    "Benin":[2.32,9.31],
+     "Bermuda Is":[-64.75,32.31],
+    "Bolivia":[-63.59,-16.29],
+    "Botswana":[24.68,-22.33],
+    "Brazil":[-51.93,-14.24],
+    "Brunei":[114.73,4.54],
+    "Bulgaria":[25.49,42.73],
+    "Burkina-faso":[-1.56,12.24],
+    "Burma":[95.96,21.92],
+    "Burundi":[29.92,-3.37],
+    "Cameroon":[12.35,7.37],
+    "Canada":[-106.35,56.13],
+    "Cayman Is":[-117.64,33.64],
+     "Central African Republic":[20.94,6.61],
+    "Chad":[18.73,15.45],
+    "Chile":[-71.54,-35.68],
+    "China":[104.20,35.86],
+    "Colombia":[-74.30,4.57], 
+
+    "Congo":[15.83,-0.23],
+        "Cook Is":[-90.49,47.61],
+        "Costa Rica":[-83.75,9.75],
+        "Croatia":[15.2,45.1],
+        "Cuba":[-77.78,21.52],
+        "Cyprus":[33.43,35.13],
+         "Czech Republic":[15.47,49.82],
+        "Denmark":[9.50,56.26],
+        "Djibouti":[42.59,11.83],
+         "Dominica Rep":[-0.19,51.52],
+        "Ecuador":[-78.18,-1.83],
+        "Egypt":[30.80,26.82],
+         "EI Salvador":[-88.90,13.79],
+        "Estonia":[25.01,58.60],
+        "Ethiopia":[40.49,9.15],
+        "Fiji":[178.07,-17.71],
+        "Finland":[25.75,61.92],
+        "France":[2.21,46.23],
+         "French Guiana":[-53.13,3.93],
+        "Gabon":[11.61,-0.80],
+        "Gambia":[-15.31,13.44],
+        "Georgia":[-82.90,32.17],
+        "Germany":[10.45,51.17],
+        "Ghana":[-1.02,7.95],
+        "Gibraltar":[-5.35,36.14],
+        "Greece":[21.82,39.07],
+        "Grenada":[-61.68,12.12],
+        "Guam":[144.79,13.44],
+        "Guatemala":[-90.23,15.78],
+        "Guinea":[-9.70,9.95],
+        "Guyana":[-58.93,4.86],
+        "Haiti":[-72.29,18.97],
+         "Honduras":[-86.24,15.20],
+        "Hong Kong":[114.11,22.40],
+        "Hungary":[19.50,47.16],
+        "Iceland":[-19.02,64.96],
+        "India":[78.96,20.59],
+         "Indonesia":[113.92,-0.79],
+        "Iran":[53.69,32.43],
+        "Iraq":[43.68,33.22],
+        "Ireland":[-8.24,53.41],
+        "Israel":[34.85,31.05],
+        "Italy":[12.57,41.87],
+         "Ivory Coast":[-5.55,7.54], 
+
+    "Jamaica":[-77.30,18.11],
+        "Japan":[138.25,36.20],
+        "Jordan":[36.24,30.59],
+         "Kampuchea":[105.46,12.00],
+        "Kazakstan":[66.92,48.02],
+        "Kenya":[37.91,-0.02],
+        "Korea":[127.98,37.66],
+        "Kuwait":[47.48,29.31],
+        "Kyrgyzstan":[74.77,41.20],
+        "Laos":[102.50,19.86],
+        "Latvia":[24.60,56.88],
+        "Lebanon":[35.86,33.85],
+        "Lesotho":[28.23,-29.61],
+        "Liberia":[-9.43,6.43],
+        "Libya":[17.23,26.34],
+         "Liechtenstein":[9.56,47.17],
+        "Lithuania":[23.88,55.17],
+        "Luxembourg":[6.13,49.82],
+        "Macao":[113.54,22.20],
+        "Madagascar":[46.87,-18.77],
+        "Malawi":[34.30,-13.25],
+        "Malaysia":[101.98,4.21],
+        "Maldives":[73.54,1.98],
+        "Mali":[-4.00,17.57],
+        "Malta":[14.38,35.94],
+         "Mariana Is":[-43.41,-20.37],
+        "Martinique":[-61.02,14.64],
+        "Mauritius":[57.55,-20.35],
+        "Mexico":[-102.55,23.63],
+        "Monaco":[7.42,43.74],
+        "Mongolia":[103.85,46.86],
+        "Montserrat Is":[-62.19,16.74],
+        "Morocco":[-7.09,31.79],
+         "Mozambique":[35.53,-18.67],
+        "Namibia":[18.49,-22.96],
+        "Nauru":[166.93,-0.52],
+        "Nepal":[84.12,28.39],
+         "Netheriands Antilles":[-68.26,12.20],
+        "Netherlands":[5.29,52.13],
+        "New Zealand":[174.89,-40.90],
+        "Nicaragua":[-85.21,12.87],
+        "Niger":[8.08,17.61],
+        "Nigeria":[8.68,9.08],
+         "North Korea":[127.51,40.34], 
+
+    "Norway":[8.47,60.47],
+    "Oman":[55.98,21.47],
+        "Pakistan":[69.35,30.38],
+        "Panama":[-80.78,8.54],
+         "Papua New Cuinea":[143.96,-6.31],
+        "Paraguay":[-58.44,-23.44],
+        "Peru":[-75.02,-9.19],
+         "Philippines":[121.77,12.88],
+        "Poland":[19.15,51.92],
+         "French Polynesia":[-149.41,-17.68],
+        "Portugal":[-8.22,39.40],
+        "Puerto Rico":[-66.59,18.22],
+        "Qatar":[51.18,25.35],
+        "Reunion":[55.54,-21.12],
+        "Romania":[24.97,45.94],
+        "Russia":[105.32,61.52],
+        "Saint Lueia":[-60.98,13.91],
+        "Saint Vincent":[7.64,45.75],
+        "Samoa Eastern":[-121.83,37.35],
+        "Samoa Western":[-124.15,40.80],
+        "San Marino":[12.46,43.94],
+         "Sao Tome and Principe":[6.61,0.19],
+        "Saudi Arabia":[45.08,23.89],
+        "Senegal":[-14.45,14.50],
+        "Seychelles":[55.49,-4.68],
+        "Sierra Leone":[-11.78,8.46],
+        "Singapore":[103.82,1.35],
+        "Slovakia":[19.70,48.67],
+        "Slovenia":[15.00,46.15],
+        "Solomon Is":[-97.37,38.92],
+        "Somali":[46.20,5.15],
+         "South Africa":[22.94,-30.56],
+        "Spain":[-3.75,40.46],
+        "Sri Lanka":[80.77,7.87],
+        "St.Lucia":[-60.98,13.91],
+        "St.Vincent":[-91.06,29.99],
+        "Sudan":[30.22,12.86],
+        "Suriname":[-56.03,3.92],
+        "Swaziland":[31.47,-26.52],
+        "Sweden":[18.64,60.13],
+        "Switzerland":[8.23,46.82],
+        "Syria":[39.00,34.80],
+        "Taiwan":[120.96,23.70],
+        "Tajikstan":[71.28,38.86], 
+
+     "Tanzania":[34.89,-6.37],
+    "Thailand":[100.99,15.87],
+        "Togo":[0.82,8.62],
+         "Tonga":[-175.20,-21.18],
+         "Trinidad and Tobago":[-61.22,10.69],
+        "Tunisia":[9.54,33.89],
+        "Turkey":[35.24,38.96],
+         "Turkmenistan":[59.56,38.97],
+        "Uganda":[32.29,1.37],
+        "Ukraine":[31.17,48.38],
+         "United Arab Emirates":[53.85,23.42],
+        "United Kingdom":[-3.44,55.38],
+        "United States":[-95.71,37.09],
+        "Uruguay":[-55.77,-32.52],
+        "Uzbekistan":[64.59,41.38],
+        "Venezuela":[-66.59,6.42],
+        "Vietnam":[108.28,14.06],
+        "Yemen":[48.52,15.55],
+        "Yugoslavia":[121.02,14.48],
+        "Zimbabwe":[29.15,-19.02],
+        "Zaire":[21.76,-4.04],
+        "Zambia":[27.85,-13.13] 
+
+
+
+
+            },
+
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10,
+                            color:'red'
+                        }
+                    }
+                },
+                data : [
+                    [{name:'China'},{name:'Afghanistan',value:700}],
+                    [{name:'China'},{name:'Albania',value:200}],
+                    [{name:'China'},{name:'Bulgaria',value:300}]
+                    /*[{name:'China'},{name:'郑州',value:70}],
+                    [{name:'China'},{name:'长春',value:60}],
+                    [{name:'China'},{name:'重庆',value:50}],
+                    [{name:'China'},{name:'长沙',value:40}],
+                    [{name:'China'},{name:'北京',value:30}],
+                    [{name:'China'},{name:'丹东',value:20}],
+                    [{name:'China'},{name:'大连',value:10}]*/
+                ]
+            }
+           /* markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    }
+                },
+                data : [
+                    {name:'China',value:95},
+                    {name:'Afghanistan',value:90},
+                    {name:'Armenia',value:80},
+                    {name:'郑州',value:70},
+                    {name:'长春',value:60},
+                    {name:'重庆',value:50},
+                    {name:'长沙',value:40},
+                    {name:'北京',value:30},
+                    {name:'丹东',value:20},
+                    {name:'大连',value:10}
+                ]
+            }*/
+        },
+        {
+            name: '森林覆盖面积(千公顷)/占土地百分比',
+            type: 'map',
+            mapType: 'world',
+            roam: true,
+            mapLocation: {
+                y : 60
+            },
+            itemStyle:{
+                emphasis:{label:{show:true}}
+            },
+            data:[
+                {name : 'Afghanistan', value : 21.1350},//阿富汗
+                //{name : 'Angola', value : 19549.124},//安哥拉
+                {name : 'Albania', value : 282.772},//阿尔巴尼亚
+                {name : 'United Arab Emirates', value : 39.323},//阿联酋
+                // {name : 'Argentina', value : 40374.224},//阿根廷
+                {name : 'Armenia', value : 118.332},//亚美尼亚
+                // {name : 'French Southern and Antarctic Lands', value : 268.065},//法属南半球和南极领地
+                // {name : 'Australia', value : 22404.488},//澳大利亚
+                // {name : 'Austria', value : 8401.924},//奥地利
+                {name : 'Azerbaijan', value : 138.1139},//阿塞拜疆
+                // {name : 'Burundi', value : 9232.753},//布隆迪
+                // {name : 'Belgium', value : 10941.288},//比利时
+                // {name : 'Benin', value : 9509.798},//贝宁
+                // {name : 'Burkina Faso', value : 15540.284},//布基纳法索
+                {name : 'Bangladesh', value : 110.1429},//孟加拉国
+                {name : 'Bulgaria', value : 352.3823},//保加利亚
+                // {name : 'The Bahamas', value : 66402.316},//巴哈马
+                // {name : 'Bosnia and Herzegovina', value : 3845.929},//波斯尼亚和黑塞哥维那
+                {name : 'Belarus', value : 416.8634},//白俄罗斯
+                // {name : 'Belize', value : 308.595},//伯利兹
+                // {name : 'Bermuda', value : 64.951},//百慕大
+                // {name : 'Bolivia', value : 716.939},//玻利维亚
+                // {name : 'Brazil', value : 19521.154},//巴西
+                {name : 'Brunei', value : 721.380},//文莱
+                {name : 'Bhutan', value : 723.2755},//不丹
+                // {name : 'Botswana', value : 1969.341},//博茨瓦纳
+                // {name : 'Central African Republic', value : 4349.921},中非共和国
+                // {name : 'Canada', value : 34126.24},//加拿大
+                // {name : 'Switzerland', value : 7830.534},//瑞士
+                // {name : 'Chile', value : 17150.76},//智利
+                {name : 'China', value : 221.208321},//中国
+                // {name : 'Ivory Coast', value : 60508.978},//象牙海岸
+                // {name : 'Cameroon', value : 20624.343},//喀麦隆
+                // {name : 'Democratic Republic of the Congo', value : 62191.161},//刚果民主共和国
+                // {name : 'Republic of the Congo', value : 3573.024},//刚果共和国
+                // {name : 'Colombia', value : 46444.798},//哥伦比亚
+                // {name : 'Costa Rica', value : 4669.685},//哥斯达黎加
+                // {name : 'Cuba', value : 11281.768},//古巴
+                // {name : 'Northern Cyprus', value : 1.468},//北塞浦路斯
+                {name : 'Cyprus', value : 187.173},//塞浦路斯
+                {name : 'Czech Republic', value : 345.2667},//捷克共和国
+                // {name : 'Germany', value : 83017.404},//德国
+                // {name : 'Djibouti', value : 834.036},//吉布提
+                // {name : 'Denmark', value : 5550.959},//丹麦
+                // {name : 'Dominican Republic', value : 10016.797},//多明尼加共和国
+                // {name : 'Algeria', value : 37062.82},//阿尔及利亚
+                // {name : 'Ecuador', value : 15001.072},//厄瓜多尔
+                {name : 'Egypt', value : 1.73},//埃及
+                // {name : 'Eritrea', value : 5741.159},
+                // {name : 'Spain', value : 46182.038},
+                {name : 'Estonia', value : 527.2232},//爱沙尼亚
+                // {name : 'Ethiopia', value : 87095.281},
+                // {name : 'Finland', value : 5367.693},
+                // {name : 'Fiji', value : 860.559},
+                // {name : 'Falkland Islands', value : 49.581},
+                // {name : 'France', value : 63230.866},
+                // {name : 'Gabon', value : 1556.222},
+                // {name : 'United Kingdom', value : 62066.35},
+                {name : 'Georgia', value : 406.2822},//格鲁吉亚
+                // {name : 'Ghana', value : 24262.901},
+                // {name : 'Guinea', value : 10876.033},
+                // {name : 'Gambia', value : 1680.64},
+                // {name : 'Guinea Bissau', value : 10876.033},
+                // {name : 'Equatorial Guinea', value : 696.167},
+                {name : 'Greece', value : 315.4054},//希腊
+                // {name : 'Greenland', value : 56.546},
+                // {name : 'Guatemala', value : 14341.576},
+                // {name : 'French Guiana', value : 231.169},
+                // {name : 'Guyana', value : 786.126},
+                // {name : 'Honduras', value : 7621.204},
+                {name : 'Croatia', value : 343.1922},//克罗地亚
+                // {name : 'Haiti', value : 9896.4},
+                {name : 'Hungary', value : 227.2069},//匈牙利
+                {name : 'Indonesia', value : 530.91010},//印尼
+                {name : 'India', value : 238.70682},//印度
+                // {name : 'Ireland', value : 4467.561},
+                {name : 'Iran', value : 58.10692},//伊朗
+                {name : 'Iraq', value : 19.825},//伊拉克
+                // {name : 'Iceland', value : 318.042},
+                {name : 'Israel', value : 76.165},//以色列
+                // {name : 'Italy', value : 60508.978},
+                // {name : 'Jamaica', value : 2741.485},
+                {name : 'Jordan', value : 11.98},//约旦
+                // {name : 'Japan', value : 127352.833},
+                {name : 'Kazakhstan', value : 12.3309},//哈萨克斯坦
+                // {name : 'Kenya', value : 40909.194},
+                {name : 'Kyrgyzstan', value : 33.637},//吉尔吉斯斯坦
+                {name : 'Cambodia', value : 536.9457},//柬埔寨
+                // {name : 'South Korea', value : 51452.352},
+                // {name : 'Kosovo', value : 97.743},
+                {name : 'Kuwait', value : 4.6},//科威特
+                {name : 'Laos', value : 813.18761},//老过
+                {name : 'Lebanon', value : 134.137},//黎巴嫩
+                // {name : 'Liberia', value : 3957.99},
+                // {name : 'Libya', value : 6040.612},
+                {name : 'Sri Lanka', value : 330.2070},//斯里兰卡
+                // {name : 'Lesotho', value : 2008.921},
+                {name : 'Lithuania', value : 348.2180},//立陶宛
+                // {name : 'Luxembourg', value : 507.885},
+                {name : 'Latvia', value : 540.3356},//拉脱维亚
+                // {name : 'Morocco', value : 31642.36},
+                {name : 'Moldova', value : 124.409},//摩尔多瓦
+                // {name : 'Madagascar', value : 21079.532},
+                // {name : 'Mexico', value : 11788.404},
+                {name : 'Macedonia', value : 396.998},//马其顿
+                // {name : 'Mali', value : 13985.961},
+                {name : 'Myanmar', value : 442.29041},//缅甸
+                {name : 'Montenegro', value : 615.827},//黑山
+                {name : 'Mongolia', value : 81.12553},//蒙古
+                // {name : 'Mozambique', value : 23967.265},
+                // {name : 'Mauritania', value : 3609.42},
+                // {name : 'Malawi', value : 15013.694},
+                {name : 'Malaysia', value : 676.22195},//马来西亚
+                // {name : 'Namibia', value : 2178.967},
+                // {name : 'New Caledonia', value : 246.379},
+                // {name : 'Niger', value : 15893.746},
+                // {name : 'Nigeria', value : 159707.78},
+                // {name : 'Nicaragua', value : 5822.209},
+                // {name : 'Netherlands', value : 16615.243},
+                // {name : 'Norway', value : 4891.251},
+                // {name : 'Nepal', value : 26846.016},
+                // {name : 'New Zealand', value : 4368.136},
+                {name : 'Oman', value : 0.2},//阿曼
+                {name : 'Pakistan', value : 19.1472},//巴基斯坦
+                // {name : 'Panama', value : 3678.128},
+                // {name : 'Peru', value : 29262.83},
+                {name : 'Philippines', value : 270.8040},//菲律宾
+                // {name : 'Papua New Guinea', value : 6858.945},
+                {name : 'Poland', value : 308.9435},//波兰
+                // {name : 'Puerto Rico', value : 3709.671},
+                // {name : 'North Korea', value : 1.468},
+                // {name : 'Portugal', value : 10589.792},
+                // {name : 'Paraguay', value : 6459.721},
+                {name : 'Qatar', value : 0.00},//卡特尔
+                {name : 'Romania', value : 298.6861},//罗马尼亚
+                {name : 'Russia', value : 498.814931},//俄罗斯
+                // {name : 'Rwanda', value : 10836.732},
+                // {name : 'Western Sahara', value : 514.648},
+                {name : 'Saudi Arabia', value : 5.977},//沙特阿拉伯
+                // {name : 'Sudan', value : 35652.002},
+                // {name : 'South Sudan', value : 9940.929},
+                // {name : 'Senegal', value : 12950.564},
+                // {name : 'Solomon Islands', value : 526.447},
+                // {name : 'Sierra Leone', value : 5751.976},
+                // {name : 'El Salvador', value : 6218.195},
+                // {name : 'Somaliland', value : 9636.173},
+                // {name : 'Somalia', value : 9636.173},
+                {name : 'Republic of Serbia', value : 311.2720},//塞尔维亚
+                // {name : 'Suriname', value : 524.96},
+                {name : 'Slovakia', value : 403.1940},//斯洛伐克
+                {name : 'Slovenia', value : 620.1248},//斯洛文尼亚
+                // {name : 'Sweden', value : 9382.297},
+                // {name : 'Swaziland', value : 1193.148},
+                {name : 'Syria', value : 27.491},//叙利亚
+                // {name : 'Chad', value : 11720.781},
+                // {name : 'Togo', value : 6306.014},
+                {name : 'Thailand', value : 321.16399},//泰国
+                {name : 'Tajikistan', value : 30.412},//塔吉克斯坦
+                {name : 'Turkmenistan', value : 88.4127},//土库曼斯坦
+                // {name : 'East Timor', value : 10016.797},
+                // {name : 'Trinidad and Tobago', value : 1328.095},
+                // {name : 'Tunisia', value : 10631.83},
+                {name : 'Turkey', value : 152.11715},//土耳其
+                // {name : 'United Republic of Tanzania', value : 44973.33},
+                // {name : 'Uganda', value : 33987.213},
+                {name : 'Ukraine', value : 167.9657},//乌克兰
+                // {name : 'Uruguay', value : 3371.982},
+                // {name : 'United States of America', value : 3122.116},
+                {name : 'Uzbekistan', value : 73.3220},//乌兹别克
+                // {name : 'Venezuela', value : 236.299},
+                {name : 'Vietnam', value : 476.14773},//越南
+                // {name : 'Vanuatu', value : 236.299},
+                // {name : 'West Bank', value : 13.565},
+                {name : 'Yemen', value : 10.549},//也门
+                // {name : 'South Africa', value : 51452.352},
+                // {name : 'Zambia', value : 13216.985},
+                // {name : 'Zimbabwe', value : 13076.978}
+            ], 
+            nameMap : {
+                'Afghanistan':'阿富汗',
+                'Angola':'安哥拉',
+                'Albania':'阿尔巴尼亚',
+                'United Arab Emirates':'阿联酋',
+                'Argentina':'阿根廷',
+                'Armenia':'亚美尼亚',
+                'French Southern and Antarctic Lands':'法属南半球和南极领地',
+                'Australia':'澳大利亚',
+                'Austria':'奥地利',
+                'Azerbaijan':'阿塞拜疆',
+                'Burundi':'布隆迪',
+                'Belgium':'比利时',
+                'Benin':'贝宁',
+                'Burkina Faso':'布基纳法索',
+                'Bangladesh':'孟加拉国',
+                'Bulgaria':'保加利亚',
+                'The Bahamas':'巴哈马',
+                'Bosnia and Herzegovina':'波斯尼亚和黑塞哥维那',
+                'Belarus':'白俄罗斯',
+                'Belize':'伯利兹',
+                'Bermuda':'百慕大',
+                'Bolivia':'玻利维亚',
+                'Brazil':'巴西',
+                'Brunei':'文莱',
+                'Bhutan':'不丹',
+                'Botswana':'博茨瓦纳',
+                'Central African Republic':'中非共和国',
+                'Canada':'加拿大',
+                'Switzerland':'瑞士',
+                'Chile':'智利',
+                'China':'中国',
+                'Ivory Coast':'象牙海岸',
+                'Cameroon':'喀麦隆',
+                'Democratic Republic of the Congo':'刚果民主共和国',
+                'Republic of the Congo':'刚果共和国',
+                'Colombia':'哥伦比亚',
+                'Costa Rica':'哥斯达黎加',
+                'Cuba':'古巴',
+                'Northern Cyprus':'北塞浦路斯',
+                'Cyprus':'塞浦路斯',
+                'Czech Republic':'捷克共和国',
+                'Germany':'德国',
+                'Djibouti':'吉布提',
+                'Denmark':'丹麦',
+                'Dominican Republic':'多明尼加共和国',
+                'Algeria':'阿尔及利亚',
+                'Ecuador':'厄瓜多尔',
+                'Egypt':'埃及',
+                'Eritrea':'厄立特里亚',
+                'Spain':'西班牙',
+                'Estonia':'爱沙尼亚',
+                'Ethiopia':'埃塞俄比亚',
+                'Finland':'芬兰',
+                'Fiji':'斐',
+                'Falkland Islands':'福克兰群岛',
+                'France':'法国',
+                'Gabon':'加蓬',
+                'United Kingdom':'英国',
+                'Georgia':'格鲁吉亚',
+                'Ghana':'加纳',
+                'Guinea':'几内亚',
+                'Gambia':'冈比亚',
+                'Guinea Bissau':'几内亚比绍',
+                'Equatorial Guinea':'赤道几内亚',
+                'Greece':'希腊',
+                'Greenland':'格陵兰',
+                'Guatemala':'危地马拉',
+                'French Guiana':'法属圭亚那',
+                'Guyana':'圭亚那',
+                'Honduras':'洪都拉斯',
+                'Croatia':'克罗地亚',
+                'Haiti':'海地',
+                'Hungary':'匈牙利',
+                'Indonesia':'印尼',
+                'India':'印度',
+                'Ireland':'爱尔兰',
+                'Iran':'伊朗',
+                'Iraq':'伊拉克',
+                'Iceland':'冰岛',
+                'Israel':'以色列',
+                'Italy':'意大利',
+                'Jamaica':'牙买加',
+                'Jordan':'约旦',
+                'Japan':'日本',
+                'Kazakhstan':'哈萨克斯坦',
+                'Kenya':'肯尼亚',
+                'Kyrgyzstan':'吉尔吉斯斯坦',
+                'Cambodia':'柬埔寨',
+                'South Korea':'韩国',
+                'Kosovo':'科索沃',
+                'Kuwait':'科威特',
+                'Laos':'老挝',
+                'Lebanon':'黎巴嫩',
+                'Liberia':'利比里亚',
+                'Libya':'利比亚',
+                'Sri Lanka':'斯里兰卡',
+                'Lesotho':'莱索托',
+                'Lithuania':'立陶宛',
+                'Luxembourg':'卢森堡',
+                'Latvia':'拉脱维亚',
+                'Morocco':'摩洛哥',
+                'Moldova':'摩尔多瓦',
+                'Madagascar':'马达加斯加',
+                'Mexico':'墨西哥',
+                'Macedonia':'马其顿',
+                'Mali':'马里',
+                'Myanmar':'缅甸',
+                'Montenegro':'黑山',
+                'Mongolia':'蒙古',
+                'Mozambique':'莫桑比克',
+                'Mauritania':'毛里塔尼亚',
+                'Malawi':'马拉维',
+                'Malaysia':'马来西亚',
+                'Namibia':'纳米比亚',
+                'New Caledonia':'新喀里多尼亚',
+                'Niger':'尼日尔',
+                'Nigeria':'尼日利亚',
+                'Nicaragua':'尼加拉瓜',
+                'Netherlands':'荷兰',
+                'Norway':'挪威',
+                'Nepal':'尼泊尔',
+                'New Zealand':'新西兰',
+                'Oman':'阿曼',
+                'Pakistan':'巴基斯坦',
+                'Panama':'巴拿马',
+                'Peru':'秘鲁',
+                'Philippines':'菲律宾',
+                'Papua New Guinea':'巴布亚新几内亚',
+                'Poland':'波兰',
+                'Puerto Rico':'波多黎各',
+                'North Korea':'北朝鲜',
+                'Portugal':'葡萄牙',
+                'Paraguay':'巴拉圭',
+                'Qatar':'卡塔尔',
+                'Romania':'罗马尼亚',
+                'Russia':'俄罗斯',
+                'Rwanda':'卢旺达',
+                'Western Sahara':'西撒哈拉',
+                'Saudi Arabia':'沙特阿拉伯',
+                'Sudan':'苏丹',
+                'South Sudan':'南苏丹',
+                'Senegal':'塞内加尔',
+                'Solomon Islands':'所罗门群岛',
+                'Sierra Leone':'塞拉利昂',
+                'El Salvador':'萨尔瓦多',
+                'Somaliland':'索马里兰',
+                'Somalia':'索马里',
+                'Republic of Serbia':'塞尔维亚共和国',
+                'Suriname':'苏里南',
+                'Slovakia':'斯洛伐克',
+                'Slovenia':'斯洛文尼亚',
+                'Sweden':'瑞典',
+                'Swaziland':'斯威士兰',
+                'Syria':'叙利亚',
+                'Chad':'乍得',
+                'Togo':'多哥',
+                'Thailand':'泰国',
+                'Tajikistan':'塔吉克斯坦',
+                'Turkmenistan':'土库曼斯坦',
+                'East Timor':'东帝汶',
+                'Trinidad and Tobago':'特里尼达和多巴哥',
+                'Tunisia':'突尼斯',
+                'Turkey':'土耳其',
+                'United Republic of Tanzania':'坦桑尼亚联合共和国',
+                'Uganda':'乌干达',
+                'Ukraine':'乌克兰',
+                'Uruguay':'乌拉圭',
+                'United States of America':'美国',
+                'Uzbekistan':'乌兹别克斯坦',
+                'Venezuela':'委内瑞拉',
+                'Vietnam':'越南',
+                'Vanuatu':'瓦努阿图',
+                'West Bank':'西岸',
+                'Yemen':'也门',
+                'South Africa':'南非',
+                'Zambia':'赞比亚',
+                'Zimbabwe':'津巴布韦'
+            }
+        }
+    ]
+};
+var app = echarts.init(document.getElementById('main'));
+app.setOption(option);
+var datas = [
+{"name":    "中国",   value: 208321, "percent":  22.1},
+{"name":    "蒙古国",  value: 12553,  "percent":  8.1},
+{"name":    "新加坡",  value: 16, "percent":  23.4},
+{"name":    "马来西亚", value: 22195,  "percent":  67.6},
+{"name":    "印度尼西亚",    value: 91010,  "percent":  53.0},
+{"name":    "缅甸",   value: 29041,  "percent":  44.2},
+{"name":    "泰国",   value: 16399,  "percent":  32.1},
+{"name":    "老挝",   value: 18761,  "percent":  81.3},
+{"name":    "柬埔寨",  value: 9457,   "percent":  53.6},
+{"name":    "越南",   value: 14773,  "percent":  47.6},
+{"name":    "文莱",   value: 380,    "percent":  72.1},
+{"name":    "菲律宾",  value: 8040,   "percent":  27.0},
+{"name":    "伊朗",   value: 10692,  "percent":  5.8},
+{"name":    "伊拉克",  value: 825,    "percent":  1.9},
+{"name":    "土耳其",  value: 11715,  "percent":  15.2},
+{"name":    "叙利亚",  value: 491,    "percent":  2.7},
+{"name":    "约旦",   value: 98, "percent":  1.1},
+{"name":    "黎巴嫩",  value: 137,    "percent":  13.4},
+{"name":    "以色列",  value: 165,    "percent":  7.6},
+{"name":    "巴勒斯坦(被占领土)",   value: 9,  "percent":  1.5},
+{"name":    "沙特阿拉伯",    value: 977,    "percent":  0.5},
+{"name":    "也门",   value: 549,    "percent":  1.0},
+{"name":    "阿曼",   value: 2,  "percent":  0.0},
+{"name":    "阿联酋",  value: 323,    "percent":  3.9},
+{"name":    "卡塔尔",  value: 0,  "percent":  0.0},
+{"name":    "科威特",  value: 6,  "percent":  0.4},
+{"name":    "巴林",   value: 1,  "percent":  0.8},
+{"name":    "希腊",   value: 4054,   "percent":  31.5},
+{"name":    "塞浦路斯", value: 173,    "percent":  18.7},
+{"name":    "埃及",   value: 73, "percent":  0.1},
+{"name":    "印度",   value: 70682,  "percent":  23.8},
+{"name":    "巴基斯坦", value: 1472,   "percent":  1.9},
+{"name":    "孟加拉",  value: 1429,   "percent":  11.0},
+{"name":    "阿富汗",  value: 1350,   "percent":  2.1},
+{"name":    "斯里兰卡", value: 2070,   "percent":  33.0},
+{"name":    "马尔代夫", value: 1,  "percent":  3.3},
+{"name":    "不丹",   value: 2755,   "percent":  72.3},
+{"name":    " 哈萨克斯坦",   value: 3309,   "percent":  1.2},
+{"name":    "乌兹别克斯坦",   value: 3220,   "percent":  7.3},
+{"name":    "土库曼斯坦",    value: 4127,   "percent":  8.8},
+{"name":    "塔吉克斯坦",    value: 412,    "percent":  3.0},
+{"name":    "吉尔吉斯斯坦",   value: 637,    "percent":  3.3},
+{"name":    "俄罗斯",  value: 8634,   "percent":  41.6},
+{"name":    "乌克兰",  value: 9657,   "percent":  16.7},
+{"name":    "白俄罗斯", value: 8634,   "percent":  41.6},
+{"name":    "格鲁吉亚", value: 2822,   "percent":  40.6},
+{"name":    "阿塞拜疆", value: 1139,   "percent":  13.8},
+{"name":    "亚美尼亚", value: 332,    "percent":  11.8},
+{"name":    "摩尔多瓦", value: 409,    "percent":  12.4},
+{"name":    "波兰",   value: 9435,   "percent":  30.8},
+{"name":    "立陶宛",  value: 2180,   "percent":  34.8},
+{"name":    "爱沙尼亚", value: 2232,   "percent":  52.7},
+{"name":    "拉脱维亚", value: 3356,   "percent":  54.0},
+{"name":    "捷克",   value: 2667,   "percent":  34.5},
+{"name":    "斯洛伐克", value: 1940,   "percent":  40.3},
+{"name":    "匈牙利",  value: 2069,   "percent":  22.7},
+{"name":    "斯洛文尼亚",    value: 1248,   "percent":  62.0},
+{"name":    "克罗地亚", value: 1922,   "percent":  34.3},
+{"name":    "波黑",   value: 2185,   "percent":  42.8},
+{"name":    "黑山",   value: 827,    "percent":  61.5},
+{"name":    "塞尔维亚", value: 2720,   "percent":  31.1},
+{"name":    "阿尔巴尼亚",    value: 772,    "percent":  28.2},
+{"name":    "罗马尼亚", value: 6861,   "percent":  29.8},
+{"name":    "保加利亚", value: 3823,   "percent":  35.2},
+{"name":    "马其顿",  value: 998,    "percent":  39.6}
+];
+var names = [];
+var values = [];
+var percent = [];
+var myChart = echarts.init(document.getElementById('echarts2'));
+var myChart2 = echarts.init(document.getElementById('echarts3'));
+    datas = sheng(datas);
+    for (var i = 0; i < datas.length; i++) {
+        names.push(datas[i].name);
+        values.push(datas[i].value);
+        percent.push(datas[i].percent);
+    };
+    initData(myChart);
+datas = sheng2(datas);
+var names = [];
+var values = [];
+var percent = [];
+    for (var i = 0; i < datas.length; i++) {
+        names.push(datas[i].name);
+        values.push(datas[i].value);
+        percent.push(datas[i].percent);
+    };
+    initData(myChart2);
+function sheng(array) {
+    var i = 0,
+    len = array.length,
+    j, d;
+    for (; i < len; i++) {
+        for (j = 0; j < len; j++) {
+            if (array[i].value < array[j].value) {
+                d = array[j];
+                array[j] = array[i];
+                array[i] = d;
+            }
+        }
+    }
+    return array;
+}
+function sheng2(array){
+    var i = 0,
+    len = array.length,
+    j, d;
+    for (; i < len; i++) {
+        for (j = 0; j < len; j++) {
+            if (array[i].percent < array[j].percent) {
+                d = array[j];
+                array[j] = array[i];
+                array[i] = d;
+            }
+        }
+    }
+    return array;
+}
+function fn1(){
+    document.getElementById('echarts2').style.visibility = '';
+    document.getElementById('echarts3').style.visibility = 'hidden';
+}
+function fn2(){
+    document.getElementById('echarts2').style.visibility = 'hidden';
+    document.getElementById('echarts3').style.visibility = '';
+}
+function initData(myChart){
+    var option4 = {
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend:{
+        data:['森林覆盖面积','森林覆盖率']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataZoom : {show: true},
+            dataView : {show: true},
+            magicType : {show: true, type: ['bar', 'line']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    dataZoom : {
+        show : true,
+        realtime : true,
+        //orient: 'vertical',   // 'horizontal'
+        //x: 0,
+        // y: 36,
+        //width: 400,
+        // height: 20,
+        //backgroundColor: 'rgba(221,160,221,0.5)',
+        //dataBackgroundColor: 'rgba(138,43,226,0.5)',
+        //fillerColor: 'rgba(38,143,26,0.6)',
+        //handleColor: 'rgba(128,43,16,0.8)',
+        //xAxisIndex:[],
+        //yAxisIndex:[],
+        start : 0,
+        end : 40
+    },
+    xAxis : [
+        {
+            type : 'category',
+            data : names
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            name: '森林覆盖面积'
+        },
+        {
+            type: 'value',
+            name: '森林覆盖率',
+            min: 0,
+            max: 100,
+            /*axisLabel: {
+                formatter: '{value} %'
+            }*/
+        }
+
+    ],
+    series : [
+        {
+            name:'森林覆盖面积',
+            type:'bar',
+            data: values
+        },
+        {
+            name:'森林覆盖率',
+            type:'line',
+            yAxisIndex: 1,
+            data: percent
+        }
+    ],
+    calculable:false
+};
+    myChart.setOption(option4,true);
+}
+</script>

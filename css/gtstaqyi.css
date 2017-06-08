@@ -1,0 +1,477 @@
+@charset "utf-8";.banner,.hid,.hr_30{overflow:hidden}*,body{padding:0;margin:0 auto}
+
+body
+{
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+
+    background: url(../images/gtstaqY20160705-01.jpg);
+}
+.clearfix{
+	*zoom:1;
+}
+.clearfix:after{
+	content: '.';
+	display: block;
+	height: 0px;
+	clear: both;
+	visibility: hidden;
+}
+.div-box
+{
+    background: url(../images/gtstaq20160717-2.png) top left no-repeat;
+}
+.div-cont
+{
+    background: url(../images/gtstaq20160717-3.png) bottom right no-repeat;
+}
+.main-cloum
+{
+    position: relative;
+    width: 878px;
+
+    margin: 0 auto;
+}
+.hr_30
+{
+    font-size: 1px;
+    line-height: 1px;
+	clear: both;
+    height: 30px;
+}
+.banner
+{
+    height: 156px; 
+
+    background: url(../images/gtstaq20160717-1.png) center top no-repeat;
+}
+/* .box01,
+.pub
+{
+    font-size: 18px;
+
+    position: absolute;
+    top: 0;
+
+    overflow: hidden;
+
+    height: 147px;
+
+    text-align: center;
+
+    color: #fff;
+}
+.cont-box
+{
+    padding-bottom: 50px;
+}
+.box01,
+.box16
+{
+    line-height: 147px;
+
+    left: 0;
+
+    width: 315px;
+
+    background: url(../images/gtstaqY20160705-04.jpg) no-repeat;
+}
+.box03,
+.box04
+{
+    line-height: 30px;
+
+    top: 0;
+
+    height: 147px;
+}
+.box03,
+.box04
+{
+    font-size: 18px;
+
+    position: absolute;
+    left: 492px;
+
+    overflow: hidden;
+
+    width: 151px;
+
+    text-align: center;
+
+    color: #fff;
+    background: #255f68;
+}
+.box04
+{
+    left: 656px;
+
+    background: url(../images/gtstaq20160705-15.jpg) no-repeat;
+}
+.box07,
+.box08,
+.box11,
+.box12,
+.box14,
+.box15
+{
+    font-size: 18px;
+    line-height: 30px;
+
+    position: absolute;
+    top: 160px;
+
+    overflow: hidden;
+
+    width: 151px;
+    height: 147px;
+
+    text-align: center;
+
+    color: #fff;
+}
+.box07
+{
+    left: 164px;
+
+    background: url(../images/gtstaqY20160705-12.jpg) no-repeat;
+}
+.box10
+{
+    left: 657px;
+
+    background: url(../images/gtstaqY20160705-11.jpg) no-repeat;
+}
+.box02,
+.box05,
+.box06,
+.box08,
+.box09,
+.box10,
+.box13
+{
+    font-size: 18px;
+
+    position: absolute;
+    top: 0;
+    left: 328px;
+
+    overflow: hidden;
+
+    width: 151px;
+    height: 147px;
+
+    text-align: center;
+
+    color: #fff;
+    background: #56a8a0;
+}
+.box02
+{
+    background: #843b83;
+}
+.box02 p
+{
+    line-height: 147px;
+}
+.sjly
+{
+    line-height: 30px;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    float: right;
+
+    width: 80px;
+    margin-top: 10px;
+
+    text-align: center;
+
+    color: #00cd99;
+    border: 2px solid #00cd99;
+    -webkit-border-radius: 20px;
+       -moz-border-radius: 20px;
+            border-radius: 20px;
+
+         -o-border-radius: 20px;
+}
+a
+{
+    text-decoration: none;
+}
+.box01 a,
+.box02 a,
+.box03 a,
+.box04 a,
+.box05 a,
+.box06 a,
+.box07 a,
+.box08 a,
+.box09 a,
+.box10 a,
+.box11 a,
+.box12 a,
+.box13 a,
+.box14 a,
+.box15 a,
+.box16 a
+{
+    color: #fff;
+}
+.box05
+{
+    left: 820px;
+
+    background: #00a2a9;
+}
+.box06
+{
+    top: 160px;
+    left: 0;
+
+    background: #00a2a9;
+}
+.box08
+{
+    top: 160px;
+
+    background: #0275ab;
+}
+.box09
+{
+    top: 160px;
+    left: 492px;
+
+    background: url(../images/gtstaqY20160705-15.jpg) no-repeat;
+}
+.box10
+{
+    top: 160px;
+    left: 657px;
+
+    background: #833b82;
+}
+.box04 p,
+.box05 p,
+.box07 p,
+.box10 p,
+.box15 p
+{
+    padding-top: 45px;
+}
+.box11
+{
+    left: 820px;
+
+    background: url(../images/gtstaq20160705-14.jpg) no-repeat;
+}
+.box12
+{
+    top: 320px;
+    left: 0;
+
+    background: url(../images/gtstaqY20160705-13.jpg) no-repeat;
+}
+.box13
+{
+    top: 320px;
+    left: 164px;
+
+    background: #106c81;
+}
+.box14
+{
+    top: 320px;
+    left: 328px;
+
+    background: #009096;
+}
+.box15
+{
+    top: 320px;
+    left: 492px;
+
+    background: #127991;
+}
+.box16
+{
+    font-size: 18px;
+
+    position: absolute;
+    top: 320px;
+    left: 657px;
+
+    text-align: center;
+}
+.box01 p,
+.box02 p,
+.box03 p,
+.box06 p,
+.box08 p,
+.box09 p,
+.box11 p,
+.box13 p,
+.box16 p
+{
+    line-height: 147px;
+}
+.box14 p,
+.box12 p
+{
+    padding-top: 30px;
+}
+.box04,
+.box05,
+.box10
+{
+    line-height: 30px;
+}
+
+ */
+
+.pop
+{
+    position: absolute;
+    right: -2px;
+    bottom: 53px;
+
+    width: 300px;
+    height: 100px;
+
+    border: 2px solid #00b5c3;
+    background: #fff;
+}
+.pop_head
+{
+    position: relative;
+
+    height: 30px;
+
+    background: #00cd99;
+}
+.pop_head a
+{
+    line-height: 30px;
+
+    position: absolute;
+    right: 8px;
+
+    text-decoration: none;
+
+    color: #fff;
+}
+.pop_head a:hover
+{
+    text-decoration: none;
+
+    color: #000;
+}
+.pop_body
+{
+    padding: 8px;
+}
+.sjly
+{
+    line-height: 30px;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    float: right;
+
+    width: 80px;
+    margin-top: 10px;
+
+    text-align: center;
+
+    color: #00cd99;
+    border: 2px solid #00cd99;
+    -webkit-border-radius: 20px;
+       -moz-border-radius: 20px;
+            border-radius: 20px;
+
+         -o-border-radius: 20px;
+}
+.sjly a
+{
+    color: #00cd99;
+}
+
+
+/* 扩展 */
+.box-big,.box-small{
+	float: left;
+	height: 147px;
+	margin: 0 13px 13px 0;
+	color: #fff;
+	font-size: 18px;
+	width: 315px;
+	line-height: 147px\9;
+	text-align: center;
+	padding: 3px 6px;
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	-webkit-box-pack:center;
+	-moz-box-pack:center;
+	box-pack:center;
+	-webkit-box-align:center;
+	-moz-box-align:center;
+	box-align:center;
+	position: relative;
+}
+.box-big p,.box-small p{
+	display: inline-block;
+}
+.box-big a,.box-small a{
+	display: inline-block\9;
+	line-height: 19px\9;
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+}
+.box-big{
+	width: 315px;
+}
+.box-small{
+	width: 151px;
+}
+.box01{
+	background: url(../images/gtstaqY20160705-04.jpg);
+	background-size: cover;
+}
+.box02{
+	background: #843b83;
+}
+.box03{
+	background: #255f68;
+}
+.box04{
+	background: #00a2a9;
+}
+.box05{
+	background: #00a2a9;
+}
+.box06{
+	background: #255f68;
+}
+.box07{
+	background: #0275ab;
+}
+.box08{
+	background: #843b83;
+}
+.model{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #000;
+	opacity: 0.6;
+    -moz-opacity:0.6;
+    filter:alpha(opacity=60);
+}

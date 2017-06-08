@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>“一带一路”沿线国家林业资源情况</title>
+    <link href="css/gtstaqyi.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body style="background:url(images/zongtimubiao-bg.jpg) center top;">
+	<div class="div-box" style="background:none;">
+    	<div class="div-cont" style="background:none;">
+            <div class="banner"></div>
+            <div class="cont-box">
+                <div class="hr_30"></div>
+                <div class="main-cloum clearfix">
+                    <div class="box01 box-big">
+                        <p><a href="page.html" target='_blank'>2015年森林面积及覆盖率</a></p>
+                    </div>
+                    <div class="box02 box-small">
+                        <p><a href="page2.html">1990-2015年森林覆盖率变化趋势</a></p>
+                    </div>
+                    <div class="box03 box-small">
+                        <div class="model"></div>
+                        <p><a href="lzsyl.html">2015年森林蓄积量</a></p>
+                    </div>
+                    <div class="box04 box-small">
+                        <div class="model"></div>
+                        <p><a href="gyldmj.html">1990-2015年森林立木蓄积变化趋势</a></p>
+                    </div>			
+                    <div class="box05 box-small">
+                        <div class="model"></div>
+                        <p><a href="slhz.html">2015年森林碳储量</a></p>
+                    </div>
+                    <div class="box06 box-small">
+                        <div class="model"></div>
+                        <p><a href="slxjl.html">1990-2015年生长林生物碳储量情况</a></p>
+                    </div>
+                    <div class="box07 box-small">
+                        <div class="model"></div>
+                        <p><a href="shtd.html">1990-2015年生产林情况</a></p>
+                    </div>
+                    <div class="box08 box-big">
+                        <div class="model"></div>
+                        <p><a href="lycyzcz.html">1990-2015年生物多样性保护情况</a></p>
+                    </div>
+                    <!-- <div class="box09">
+                        
+                        <p><a href="sdmj.html">湿地面积</a></p>
+                        
+                    </div>
+                    <div class="box10">
+                        <p><a href="yhsw.html">林业有害生物<br/>成灾率</a></p>
+                    </div>
+                    <div class="box11">
+                        
+                        <p><a href="slgy.html">森林公园总数</a></p>
+                    </div>
+                    <div class="box12">
+                        
+                        <p><a href="lyzrbhq.html">林业自然<br />保护区面积<br/>占国土面积</a></p>
+                    </div>
+                    <div class="box13">
+                        
+                        <p><a href="ldbyl.html">林地保有量</a></p>
+                    </div>
+                    <div class="box14">
+                        
+                        <p><a href="dzw.html">国家重点保护<br/>野生动植物<br/>保护率</a></p>
+                    </div>
+                    <div class="box15">
+                        <p><a href="csjc.html">城市建成区<br/>绿化覆盖率</a></p>
+                    </div>
+                    <div class="box16">
+                        <p><a href="sljdyk.html">森林旅游累计接待游客</a></p>
+                    </div> -->
+                    
+                    
+                    <div class="hr_30"></div>
+                    <div id="pop" class="pop" style="display:none; "> 
+                       <div class="pop_head"><a href="javascript:void(0);" onClick="hide()">关闭</a></div> 
+                       <div class="pop_body" style="line-height:28px;">联合国粮农组织发布 《2015全球森林资源评估报告》
+</div> 
+                    </div> 
+                    <div class="sjly"><a href="javascript:void(0);" onClick="show();">数据来源</a></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+	
+<script type="text/javascript"> 
+var EX = {
+  addEvent:function(k,v){
+    var me = this;
+    if (me.addEventListener)
+      me.addEventListener(k, v, false);
+    else if(me.attachEvent)
+      me.attachEvent("on" + k, v);
+    else
+      me["on" + k] = v;
+  },
+  removeEvent:function(k,v){
+    var me = this;
+    if (me.removeEventListener)
+      me.removeEventListener(k, v, false);
+    else if (me.detachEvent)
+      me.detachEvent("on" + k, v);
+    else
+      me["on" + k] = null;
+  },
+  stop:function(evt){
+    evt = evt || window.event;
+    evt.stopPropagation?evt.stopPropagation():evt.cancelBubble=true;
+  }
+};
+document.getElementById('pop').onclick = EX.stop;
+var url = '#'; 
+function show(){ 
+var o = document.getElementById('pop'); 
+o.style.display = ""; 
+setTimeout(function(){EX.addEvent.call(document,'click',hide);});
+} 
+function hide(){ 
+var o = document.getElementById('pop'); 
+o.style.display = "none"; 
+EX.removeEvent.call(document,'click',hide);
+} 
+</script> 
+
+</body>
+</html>
